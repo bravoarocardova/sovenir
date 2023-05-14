@@ -3,8 +3,8 @@
 <meta name="description" content="">
 <meta name="author" content="Dashboard">
 <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>Admin Elektronik
-	<?php if(!empty($this->uri->segment(1))) echo ":" . ucfirst($this->uri->segment(1)) . " - " . ucfirst($this->uri->segment(2)) ?>
+<title>Sovenir Fiqi
+	<?php if (!empty($this->uri->segment(1))) echo ":" . ucfirst($this->uri->segment(1)) . " - " . ucfirst($this->uri->segment(2)) ?>
 </title>
 
 

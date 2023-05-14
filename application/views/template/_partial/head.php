@@ -6,18 +6,19 @@
 <!-- FontAwesome CSS -->
 <link rel="stylesheet" href="<?= base_url('assets/fontawesome/css/all.css') ?>">
 
-<title>HD Elektronik <?php if(!empty($this->uri->segment(1))) echo ":" . ucfirst($this->uri->segment(1)) . " - " . ucfirst($this->uri->segment(2)) ?></title>
+<title>Sovenir Fiqi <?php //if (!empty($this->uri->segment(1))) echo ":" . ucfirst($this->uri->segment(1)) . " - " . ucfirst($this->uri->segment(2)) 
+                    ?></title>
 
 <style>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 </style>

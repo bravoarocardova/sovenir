@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Sistem Penjualan Toko Hd Elektronik</title>
+	<title>Sistem Penjualan Sovenir Fiqi</title>
 	<!-- BOOTSTRAP STYLES-->
 	<link href="<?= base_url() ?>assets/css/bs3/bootstrap.css" rel="stylesheet" />
 	<!-- FONTAWESOME STYLES-->
@@ -21,7 +21,7 @@
 		<div class="row text-center ">
 			<div class="col-md-12">
 				<br /><br />
-				<h2> Admin Hd Elektronik: Login</h2>
+				<h2> Sovenir Fiqi Login</h2>
 
 				<h5>( Masuk untuk mendapatkan akses )</h5>
 				<br />
@@ -58,8 +58,6 @@
 							<hr />
 							<!-- Not register ? <a href="registeration.html">click here </a> -->
 						</form>
-
-						$_SESSION['admin']=$ambil->fetch_assoc();
 
 					</div>
 
