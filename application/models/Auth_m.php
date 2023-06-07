@@ -20,7 +20,9 @@ class Auth_m extends CI_Model{
                 'email_pelanggan' => $post['email'],
                 'password_pelanggan' => $post['password'],
                 'telepon_pelanggan' => $post['telepon'],
-                'alamat_pelanggan' => $post['alamat']
+                'id_provinsi' => $post['provinsi'],
+                'id_kota' => $post['kabkot'],
+                'alamat_pelanggan' => $post['alamat_lengkap']
             ];
             return $this->db->insert('pelanggan',$value);
         }

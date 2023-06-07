@@ -14,8 +14,10 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$id_pelanggan = $this->session->userdata('pelanggan')->id_pelanggan;
+		$provinsi = $this->rajaongkirl->rajaongkir('province');
 		$data = [
-			'profile' => $this->db->where("id_pelanggan", $id_pelanggan)->get('pelanggan')->result_array()[0]
+			'profile' => $this->db->where("id_pelanggan", $id_pelanggan)->get('pelanggan')->result_array()[0],
+			'provinsi' => json_decode($provinsi)->rajaongkir->results,
 		];
 
 		$this->template->load('template/template', 'profile/profile', $data);
@@ -29,7 +31,6 @@ class Profile extends CI_Controller
 			"nama_pelanggan" => $post['nama'],
 			'telepon_pelanggan' => $post['no_telp'],
 			'email_pelanggan' => $post['email'],
-			'alamat_pelanggan' => $post['alamat'],
 		];
 
 		if ($this->db->update("pelanggan", $data, ['id_pelanggan' => $id_pelanggan])) {
@@ -45,6 +46,34 @@ class Profile extends CI_Controller
 		} else {
 			echo "<script>
 							alert('Gagal Update profil');
+							document.location.href='" . base_url('/profile') . "';
+					</script>";
+		}
+	}
+
+	public function update_alamat()
+	{
+		$id_pelanggan = $this->session->userdata('pelanggan')->id_pelanggan;
+		$post = $this->input->post();
+		$data = [
+			"id_provinsi" => $post['provinsi'],
+			'id_kota' => $post['kabkot'],
+			'alamat_pelanggan' => $post['alamat_lengkap'],
+		];
+
+		if ($this->db->update("pelanggan", $data, ['id_pelanggan' => $id_pelanggan])) {
+			$user = $this->db->where("id_pelanggan", $id_pelanggan)->get('pelanggan')->result()[0];
+			$params = [
+				'pelanggan' => $user
+			];
+			$this->session->set_userdata($params);
+			echo "<script>
+							alert('Berhasil Update alamat');
+							document.location.href='" . base_url('/profile') . "';
+					</script>";
+		} else {
+			echo "<script>
+							alert('Gagal Update alamat');
 							document.location.href='" . base_url('/profile') . "';
 					</script>";
 		}

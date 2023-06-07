@@ -8,8 +8,18 @@
 				<a class="nav-link <?= $this->uri->segment(1) == '' ? 'active' : '' ?>" href="<?= base_url() ?>"><i class="fas fa-home"></i> Home</a>
 				<?php if (!empty($this->session->userdata('pelanggan'))) : ?>
 					<a class="nav-link <?= $this->uri->segment(1) == 'profile' ? 'active' : '' ?>" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> Profil</a>
-					<a class="nav-link <?= $this->uri->segment(1) == 'keranjang' ? 'active' : '' ?>" href="<?= base_url('keranjang') ?>"><i class="fas fa-shopping-cart"></i> Keranjang</a>
-					<a class="nav-link <?= $this->uri->segment(1) == 'riwayat' ? 'active' : '' ?>" href="<?= base_url('riwayat') ?>"><i class="fas fa-book"></i> Riwayat Belanja</a>
+					<?php
+					$cartTotal = '';
+					if ($this->session->userdata('cart_contents') != null) {
+						$cartTotal = $this->session->userdata('cart_contents')['total_items'];
+					}
+					?>
+					<a class="nav-link <?= $this->uri->segment(1) == 'keranjang' ? 'active' : '' ?>" href="<?= base_url('keranjang') ?>"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge bg-warning"><?= $cartTotal ?></span></a>
+					<?php
+					$id_pelanggan = $this->session->userdata('pelanggan')->id_pelanggan;
+					$pembelian = $this->db->where("id_pelanggan = '$id_pelanggan' AND status_pembelian IN ('sudah kirim pembayaran', 'dikirim')")->get('pembelian')->num_rows();
+					?>
+					<a class="nav-link <?= $this->uri->segment(1) == 'riwayat' ? 'active' : '' ?>" href="<?= base_url('riwayat') ?>"><i class="fas fa-book"></i> Riwayat Belanja <span class="badge bg-warning"><?= $pembelian == 0 ? '' : $pembelian ?></span></a>
 					<a class="nav-link" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt"></i>
 						Logout</a>
 				<?php else : ?>

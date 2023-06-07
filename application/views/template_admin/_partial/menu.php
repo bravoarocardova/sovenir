@@ -3,7 +3,7 @@
 		<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 	</div>
 	<!--logo start-->
-	<a href="<?= base_url('admin/dashboard') ?>" class="logo"><b>Sovenir<span>Fiqi</span></b></a>
+	<a href="<?= base_url('admin/dashboard') ?>" class="logo"><b>Souvenir<span>Fiqih</span></b></a>
 	<!--logo end-->
 
 	<div class="top-menu">
@@ -34,7 +34,10 @@
 			<li class="mt-2">
 				<a class="<?php if ($this->uri->segment(2) == 'pembelian') echo 'active'; ?>" href="<?= base_url('admin/pembelian') ?>">
 					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-					<span>Pembelian</span>
+					<?php
+					$pembelian = $this->db->where("status_pembelian IN ('sudah kirim pembayaran', 'dikirim')")->get('pembelian')->num_rows();
+					?>
+					<span>Pembelian <span class="badge bg-danger"><?= $pembelian ?></span></span>
 				</a>
 			</li>
 			<li class="mt-2">

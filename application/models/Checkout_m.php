@@ -1,20 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Checkout_m extends CI_Model{
+class Checkout_m extends CI_Model
+{
 
-    public function prosesCheckout($post,$produk)
+    public function prosesCheckout($post, $produk)
     {
-        $ongkir = $this->getOngkir($post['id_ongkir']);
-        
         $pembelian = [
             'id_pelanggan' => $post['id_pelanggan'],
-            'id_ongkir' => $post['id_ongkir'],
+            'ongkir' => $post['ongkir'],
             'tanggal_pembelian' => date("Y-m-d"),
-            'total_pembelian' => $post['total'] + $ongkir->tarif,
+            'total_pembelian' => $post['total'] + $post['ongkir'],
+            'tujuan' => $post['tujuan'],
+            'ekspedisi' => $post['kurir'] . " - " . $post['ekspedisi'],
             'status_pembelian' => 'Belum Bayar'
         ];
-        $this->db->insert('pembelian',$pembelian);
+        $this->db->insert('pembelian', $pembelian);
         $idPembelian = $this->db->insert_id();
 
         foreach ($produk as $p) {
@@ -22,10 +23,10 @@ class Checkout_m extends CI_Model{
         }
         return $idPembelian;
     }
-    
+
     private function getOngkir($id)
     {
-        return $this->db->get_where('ongkir',['id_ongkir' => $id])->row();
+        return $this->db->get_where('ongkir', ['id_ongkir' => $id])->row();
     }
 
     private function insertPembelianProduk($idPembelian, $p)
@@ -41,9 +42,8 @@ class Checkout_m extends CI_Model{
 
     private function updateStok($p)
     {
-        $this->db->set('stok_produk','stok_produk-'.$p['qty']);
+        $this->db->set('stok_produk', 'stok_produk-' . $p['qty']);
         $this->db->where('id_produk', $p['id_produk']);
         return $this->db->update('produk');
     }
-
 }

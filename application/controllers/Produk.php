@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Produk extends CI_Controller {
+class Produk extends CI_Controller
+{
 
 	function __construct()
 	{
@@ -10,9 +11,9 @@ class Produk extends CI_Controller {
 	}
 
 	public function index()
-	{	
+	{
 		$data["produk"] = $this->produk_m->getProduk();
-		$this->template->load('template/template','produk/produk', $data);
+		$this->template->load('template/template', 'produk/produk', $data);
 	}
 
 	public function search()
@@ -25,7 +26,7 @@ class Produk extends CI_Controller {
 	public function detail($id)
 	{
 		$data["produk"] = $this->produk_m->getProduk($id)[0];
-		$this->template->load('template/template','produk/detail', $data);
+		$this->template->load('template/template', 'produk/detail', $data);
 	}
 
 	public function add_to_cart()
@@ -35,12 +36,13 @@ class Produk extends CI_Controller {
 
 		$post = $this->input->post(NULL, TRUE);
 		$data = [
-			'id'       =>  $post['id_produk'], 
-			'qty'      =>  $post['qty'], 
-			'price'    =>  $post['harga'], 
-			'name'     =>  $post['nama']
+			'id'       =>  $post['id_produk'],
+			'qty'      =>  $post['qty'],
+			'price'    =>  $post['harga'],
+			'name'     =>  $post['nama'],
+			'options' => array('berat' => $post['berat']),
 		];
-		
+
 		$this->cart->insert($data);
 
 		echo "<script>
@@ -48,5 +50,4 @@ class Produk extends CI_Controller {
 				document.location.href='" . base_url('keranjang') . "';
 			</script>";
 	}
-
 }

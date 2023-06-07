@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 14 Bulan Mei 2023 pada 19.23
+-- Waktu pembuatan: 07 Jun 2023 pada 21.10
 -- Versi server: 8.0.32-0ubuntu0.22.04.2
 -- Versi PHP: 8.1.2-1ubuntu2.11
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sovenir`
+-- Database: `souvenir_fiqih`
 --
 
 -- --------------------------------------------------------
@@ -39,28 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_lengkap`) VALUES
-(1, 'admin', 'admin123', 'hd elektronik');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ongkir`
---
-
-CREATE TABLE `ongkir` (
-  `id_ongkir` int NOT NULL,
-  `nama_kota` varchar(100) NOT NULL,
-  `tarif` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `ongkir`
---
-
-INSERT INTO `ongkir` (`id_ongkir`, `nama_kota`, `tarif`) VALUES
-(1, 'Muaro Jambi', 25000),
-(2, 'Batanghari', 30000),
-(3, 'Kota Jambi', 19000);
+(1, 'admin', 'admin123', 'Souvenir Fiqih');
 
 -- --------------------------------------------------------
 
@@ -74,6 +53,8 @@ CREATE TABLE `pelanggan` (
   `password_pelanggan` varchar(50) NOT NULL,
   `nama_pelanggan` varchar(100) NOT NULL,
   `telepon_pelanggan` varchar(25) NOT NULL,
+  `id_provinsi` int NOT NULL,
+  `id_kota` int NOT NULL,
   `alamat_pelanggan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,6 +67,7 @@ CREATE TABLE `pelanggan` (
 CREATE TABLE `pembayaran` (
   `id_pembayaran` int NOT NULL,
   `id_pembelian` int NOT NULL,
+  `nama` varchar(100) NOT NULL,
   `bank` varchar(255) NOT NULL,
   `jumlah` int NOT NULL,
   `tanggal` date NOT NULL,
@@ -101,9 +83,11 @@ CREATE TABLE `pembayaran` (
 CREATE TABLE `pembelian` (
   `id_pembelian` int NOT NULL,
   `id_pelanggan` int NOT NULL,
-  `id_ongkir` int NOT NULL,
+  `ongkir` int NOT NULL,
   `tanggal_pembelian` date NOT NULL,
   `total_pembelian` int NOT NULL,
+  `tujuan` text NOT NULL,
+  `ekspedisi` varchar(255) NOT NULL,
   `status_pembelian` varchar(100) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -119,6 +103,20 @@ CREATE TABLE `pembelian_produk` (
   `id_produk` int NOT NULL,
   `jumlah` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Trigger `pembelian_produk`
+--
+DELIMITER $$
+CREATE TRIGGER `update_stok` AFTER INSERT ON `pembelian_produk` FOR EACH ROW BEGIN
+
+   UPDATE produk SET stok_produk = stok_produk - NEW.jumlah
+
+   WHERE id_produk = NEW.id_produk;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -141,9 +139,9 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_produk`, `berat_produk`, `foto_produk`, `deskripsi_produk`, `stok_produk`) VALUES
-(3, 'Tv Polytron 32 In', 1750000, 5800, 'tv_polytron.jpg', 'LED TV\r\n- 32 Inch\r\n- Cinemax LED\r\n- Resolusi HD (1366x768p)\r\n- A+ Display panel\r\n- 300 nit brightness\r\n- 8 modes picture setting\r\n- USB movie\r\n- With speaker\r\n- 2 x HDMI\r\n- 1 x VGA/PC Input\r\n- 1 x Audio Out\r\n- 1 x USB Movie\r\n- 1 x AV / Component Input\r\n- Daya 55 Watt', 9),
-(4, 'Speaker Polytron Pma 9506', 655000, 5600, 'speaker_polytron_pma_9506.jpg', 'Nama Produk : Polytron Multimedia Audio\r\nTipe : PMA 9300\r\nWarna : Gold, Putih dan Hitam\r\nGaransi Resmi : 1 Tahun\r\n2.1 Channel\r\nBluetooth\r\nBazzoke\r\nUSB MP3 Player\r\nSD / MMC MP3 Player\r\nUSB Input\r\nSD / MMC Input\r\nBuilt in FM Radio\r\nAmbience Light\r\nTerminal Line IN\r\nTerminal AUX IN\r\nPower Output : 35 Watt RMS\r\nDaya : 30 Watt\r\nTegangan : 220VAC 50Hz\r\nKotak : 34.5 x 32 x 34.5 cm\r\nBerat : 5.6 kg\r\n', 10),
-(7, 'Vacuum Cleaner', 985000, 8000, 'vacuum_cleaner.jpg', 'penyedot debu vacuum cleaner panasonic cg-300', 25);
+(3, 'Tv Polytron 32 In', 1750000, 5800, 'tv_polytron.jpg', 'LED TV\r\n- 32 Inch\r\n- Cinemax LED\r\n- Resolusi HD (1366x768p)\r\n- A+ Display panel\r\n- 300 nit brightness\r\n- 8 modes picture setting\r\n- USB movie\r\n- With speaker\r\n- 2 x HDMI\r\n- 1 x VGA/PC Input\r\n- 1 x Audio Out\r\n- 1 x USB Movie\r\n- 1 x AV / Component Input\r\n- Daya 55 Watt', 100),
+(4, 'Speaker Polytron Pma 9506', 655000, 5600, 'speaker_polytron_pma_9506.jpg', 'Nama Produk : Polytron Multimedia Audio\r\nTipe : PMA 9300\r\nWarna : Gold, Putih dan Hitam\r\nGaransi Resmi : 1 Tahun\r\n2.1 Channel\r\nBluetooth\r\nBazzoke\r\nUSB MP3 Player\r\nSD / MMC MP3 Player\r\nUSB Input\r\nSD / MMC Input\r\nBuilt in FM Radio\r\nAmbience Light\r\nTerminal Line IN\r\nTerminal AUX IN\r\nPower Output : 35 Watt RMS\r\nDaya : 30 Watt\r\nTegangan : 220VAC 50Hz\r\nKotak : 34.5 x 32 x 34.5 cm\r\nBerat : 5.6 kg\r\n', 90),
+(7, 'Vacuum Cleaner', 985000, 8000, 'vacuum_cleaner.jpg', 'penyedot debu vacuum cleaner panasonic cg-300', 100);
 
 --
 -- Indexes for dumped tables
@@ -154,12 +152,6 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_produk`, `berat_produk`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
-
---
--- Indeks untuk tabel `ongkir`
---
-ALTER TABLE `ongkir`
-  ADD PRIMARY KEY (`id_ongkir`);
 
 --
 -- Indeks untuk tabel `pelanggan`
@@ -202,40 +194,34 @@ ALTER TABLE `admin`
   MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `ongkir`
---
-ALTER TABLE `ongkir`
-  MODIFY `id_ongkir` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_pembelian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
-  MODIFY `id_pembelian_produk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_pembelian_produk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_produk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

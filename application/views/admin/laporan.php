@@ -21,8 +21,7 @@
 		<div class="col-md-2">
 			<label>&nbsp;</label><br>
 			<button class="btn btn-primary" name="kirim">Lihat</button>
-			<a href="<?= base_url('admin/laporan/cetak') ?>?tgl_mulai=<?php echo $tgl_mulai ?>&tgl_selesai=<?php echo $tgl_selesai ?>"
-				target="_blank"><i class="fa fa-sm fa-print"></i></a>
+			<a href="<?= base_url('admin/laporan/cetak') ?>?tgl_mulai=<?php echo $tgl_mulai ?>&tgl_selesai=<?php echo $tgl_selesai ?>" target="_blank"><i class="fa fa-sm fa-print"></i></a>
 		</div>
 
 	</div>
@@ -41,26 +40,24 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php $nomor=1; ?>
-		<?php $total =0; ?>
-		<?php foreach ($semuadata as $value): ?>
-		<?php $total+=$value->total_pembelian ?>
-		<tr>
-			<td><?php echo $nomor; ?></td>
-			<td><?php echo $value->nama_pelanggan ?></td>
-			<td><?php echo $value->tanggal_pembelian ?></td>
-			<td>Rp. <?php echo number_format($value->total_pembelian) ?></td>
-			<td><?php echo $value->status_pembelian ?></td>
-			<td></td>
-		</tr>
-		<?php $nomor++; ?>
+		<?php $nomor = 1; ?>
+		<?php $total = 0; ?>
+		<?php foreach ($semuadata as $value) : ?>
+			<?php $total += $value->total_pembelian ?>
+			<tr>
+				<td><?php echo $nomor; ?></td>
+				<td><?php echo $value->nama_pelanggan ?></td>
+				<td><?php echo $value->tanggal_pembelian ?></td>
+				<td>Rp. <?php echo number_format($value->total_pembelian) ?></td>
+				<td><?php echo $value->status_pembelian ?></td>
+			</tr>
+			<?php $nomor++; ?>
 		<?php endforeach ?>
 	</tbody>
 	<tfoot>
 		<tr>
 			<th colspan="3">Total = </th>
 			<th>Rp. <?php echo number_format($total) ?></th>
-			<th></th>
 		</tr>
 	</tfoot>
 </table>
