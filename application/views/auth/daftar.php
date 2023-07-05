@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <body>
 
   <main>
-    <div class="d-flex justify-content-center vh-100">
+    <div class="d-flex justify-content-center">
       <div class="d-flex align-items-center">
         <div class="card" style="width: 18rem;">
           <div class="card-header text-center bg-dark text-light fw-bolder">

@@ -2,15 +2,16 @@
 
 <a href="<?= base_url('admin/produk/tambah') ?>" class="btn btn-primary">+ Tambah Data</a> <br><br>
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="dataTable">
 	<thead>
 		<tr>
-			<th>no</th>
-			<th>nama</th>
-			<th>harga</th>
-			<th>berat</th>
-			<th>stok</th>
-			<th>foto</th>
+			<th>NO</th>
+			<th>NAMA</th>
+			<th>HARGA JUAL</th>
+			<th>HARGA BELI</th>
+			<th>BERAT</th>
+			<th>STOK</th>
+			<th>FOTO</th>
 
 			<th>aksi</th>
 		</tr>
@@ -22,6 +23,7 @@
 				<td><?php echo $nomor; ?></td>
 				<td><?php echo $p->nama_produk ?></td>
 				<td>Rp. <?php echo number_format($p->harga_produk) ?></td>
+				<td>Rp. <?php echo number_format($p->harga_beli) ?></td>
 				<td><?php echo $p->berat_produk ?> g</td>
 				<td><?php echo $p->stok_produk ?></td>
 				<td>

@@ -62,4 +62,15 @@ class Pembelian extends CI_Controller
                     </script>";
         }
     }
+
+    public function resi($id)
+    {
+        check_admin_not_login();
+        if ($this->pembelian_m->resi($id, $this->input->post('resi'))) {
+            echo "<script>
+                        alert('Berhasil update resi');
+                        document.location.href='" . base_url('admin/pembelian/detail/' . $id) . "';
+                    </script>";
+        }
+    }
 }

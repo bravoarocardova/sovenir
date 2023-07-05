@@ -47,12 +47,18 @@
 				</a>
 			</li>
 			<li class="mt-2">
-				<a class="<?php if ($this->uri->segment(2) == 'laporan') echo 'active'; ?>" href="<?= base_url('admin/laporan') ?>">
+				<a class="<?php if ($this->uri->segment(3) == 'pesanan') echo 'active'; ?>" href="<?= base_url('admin/laporan/pesanan') ?>">
 					<!-- <i class="glyphicon glyphicon-use"></i> -->
 					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 					<span>Laporan Pesanan</span>
 				</a>
 			</li>
+			<li class="mt-2">
+				<a class="<?php if ($this->uri->segment(3) == 'produk') echo 'active'; ?>" href="<?= base_url('admin/laporan/produk') ?>">
+					<!-- <i class="glyphicon glyphicon-use"></i> -->
+					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+					<span>Laporan Produk</span>
+				</a>
 			</li>
 			<!-- <li class="mt">
 				<a class="active" href="index.php?halaman=grafik">

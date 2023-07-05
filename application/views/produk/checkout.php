@@ -21,7 +21,7 @@
 			<tr>
 				<td><?= $nomor; ?></td>
 				<td><?= $row['name'] ?></td>
-				<td><?= $row['options']['berat'] ?> g</td>
+				<td><?= $row['options']['berat'] * $row['qty'] ?> g</td>
 				<td>Rp. <?= number_format($row['price']); ?></td>
 				<td><?= $row['qty'] ?></td>
 				<td>Rp. <?= number_format($row['subtotal']); ?></td>
@@ -29,13 +29,13 @@
 		<?php
 			$nomor++;
 			$total += $row['subtotal'];
-			$total_berat += $row['options']['berat'];
+			$total_berat += $row['options']['berat'] * $row['qty'];
 		endforeach
 		?>
 	</tbody>
 	<tfoot>
 		<tr>
-			<th colspan="4">Total Belanja</th>
+			<th colspan="5">Total Belanja</th>
 			<th>Rp. <?php echo number_format($total) ?> </th>
 		</tr>
 	</tfoot>

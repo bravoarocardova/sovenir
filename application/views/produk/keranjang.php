@@ -21,7 +21,7 @@
 				<td><?= $nomor; ?></td>
 				<td><?= $row['name'] ?></td>
 				<td>Rp. <?= number_format($row['price']); ?></td>
-				<td><?= $row['options']['berat'] ?> g</td>
+				<td><?= $row['options']['berat'] * $row['qty'] ?> g</td>
 				<td>
 					<div class="w-25 d-flex">
 						<!-- <span class="qty-minus d-flex align-items-center me-2"><i class="fa fa-minus"></i></span> -->
@@ -41,7 +41,7 @@
 		?>
 	</tbody>
 	<tfooter>
-		<td colspan="4">Total</td>
+		<td colspan="5">Total</td>
 		<td>Rp. <?= number_format($total) ?></td>
 		<td></td>
 	</tfooter>

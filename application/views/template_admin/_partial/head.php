@@ -16,6 +16,8 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/admin/') ?>lib/gritter/css/jquery.gritter.css" />
 <link href="<?= base_url('assets/admin/') ?>css/style.css" rel="stylesheet">
 <link href="<?= base_url('assets/admin/') ?>css/style-responsive.css" rel="stylesheet">
+<link href="<?= base_url('assets/admin/') ?>lib/DataTables/datatables.min.css" rel="stylesheet" />
+
 <script src="<?= base_url('assets/admin/') ?>lib/chart-master/Chart.js"></script>
 <link href="<?= base_url('assets/admin/') ?>css/grafik.css" rel="stylesheet" />
 <script src="<?= base_url('assets/admin/') ?>css/Chart.js"></script>

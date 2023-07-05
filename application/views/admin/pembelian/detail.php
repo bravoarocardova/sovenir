@@ -16,8 +16,20 @@
 		</span> <br>
 		Tanggal : <?php echo $pembelian->tanggal_pembelian ?> <br>
 		Ekspedisi : <?= $pembelian->ekspedisi ?> <br>
-		Tujuan : <?php echo $pembelian->tujuan ?>
+		Tujuan : <?php echo $pembelian->tujuan ?> <br>
+		Resi : <?php echo $pembelian->resi ?>
 	</p>
+
+	<div class="container">
+		<div class="row">
+			<form action="<?= base_url('admin/pembelian/resi/' . $pembelian->id_pembelian) ?>" method="POST">
+				<div class="form-group">
+					<input type="text" name="resi" id="resi" placeholder="NO RESI">
+					<button class="btn btn-primary">Simpan</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<div class="row">
 		<!-- cetak pembelian -->

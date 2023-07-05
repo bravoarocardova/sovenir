@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Sistem Penjualan Sovenir Fiqi</title>
+	<title>Sistem Penjualan Souvenir Fiqih</title>
 	<!-- BOOTSTRAP STYLES-->
 	<link href="<?= base_url() ?>assets/css/bs3/bootstrap.css" rel="stylesheet" />
 	<!-- FONTAWESOME STYLES-->

@@ -65,4 +65,14 @@ class Pembelian_m extends CI_Model
         $this->db->where('id_pembelian', $id);
         return $this->db->update('pembelian', $value);
     }
+
+    public function resi($id, $resi)
+    {
+        $value = [
+            'resi' => $resi,
+        ];
+
+        $this->db->where('id_pembelian', $id);
+        return $this->db->update('pembelian', $value);
+    }
 }

@@ -1,14 +1,15 @@
 <h2>Data Pembelian</h2>
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="dataTable">
 	<thead>
 		<tr>
-			<th>No</th>
-			<th>Nama Pelanggan</th>
-			<th>Tanggal</th>
-			<th>Total</th>
-			<th>Status</th>
-			<th>Aksi</th>
+			<th>NO</th>
+			<th>NAMA PELANGGAN</th>
+			<th>TANGGAL</th>
+			<th>TOTAL</th>
+			<th>STATUS</th>
+			<th>RESI</th>
+			<th>AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,6 +27,7 @@
 						<?php echo ucfirst($p->status_pembelian) ?>
 					</span>
 				</td>
+				<td><?php echo $p->resi ?></td>
 				<td>
 					<a href="<?= base_url('admin/pembelian/detail/') . $p->id_pembelian ?>" class="btn btn-info">detail</a>
 				</td>

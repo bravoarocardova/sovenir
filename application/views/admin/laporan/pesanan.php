@@ -7,21 +7,23 @@
 		<div class="col-md-5">
 			<div class="form-group">
 				<label>Tanggal Mulai</label>
-				<input type="date" class="form-control" name="tglm" value="<?php echo $tgl_mulai ?>">
+				<input type="date" class="form-control" name="tglm" value="<?php echo $tgl_mulai ?>" required>
 
 			</div>
 		</div>
 		<div class="col-md-5">
 			<div class="form-group">
 				<label>Tanggal Selesai</label>
-				<input type="date" class="form-control" name="tgls" value="<?php echo $tgl_selesai ?>">
+				<input type="date" class="form-control" name="tgls" value="<?php echo $tgl_selesai ?>" required>
 
 			</div>
 		</div>
 		<div class="col-md-2">
 			<label>&nbsp;</label><br>
 			<button class="btn btn-primary" name="kirim">Lihat</button>
-			<a href="<?= base_url('admin/laporan/cetak') ?>?tgl_mulai=<?php echo $tgl_mulai ?>&tgl_selesai=<?php echo $tgl_selesai ?>" target="_blank"><i class="fa fa-sm fa-print"></i></a>
+			<?php if (@$_POST) : ?>
+				<a href="<?= base_url('admin/laporan/cetak_pesanan') ?>?tgl_mulai=<?php echo $tgl_mulai ?>&tgl_selesai=<?php echo $tgl_selesai ?>" target="_blank"><i class="fa fa-sm fa-print"></i></a>
+			<?php endif ?>
 		</div>
 
 	</div>
@@ -32,11 +34,11 @@
 	<br><br>
 	<thead>
 		<tr>
-			<th>No</th>
-			<th>Pelanggan</th>
-			<th>Tanggal</th>
-			<th>Subtotal</th>
-			<th>Status</th>
+			<th>NO</th>
+			<th>PELANGGAN</th>
+			<th>TANGGAL</th>
+			<th>SUBTOTAL</th>
+			<th>STATUS</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -56,7 +58,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<th colspan="3">Total = </th>
+			<th colspan="3">Total </th>
 			<th>Rp. <?php echo number_format($total) ?></th>
 		</tr>
 	</tfoot>

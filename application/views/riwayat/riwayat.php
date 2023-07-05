@@ -7,6 +7,7 @@
 		<th>Tanggal</th>
 		<th>Status</th>
 		<th>Total</th>
+		<th>Resi</th>
 		<th>Opsi</th>
 	</tr>
 	<tbody>
@@ -24,6 +25,7 @@
 					</span>
 				</td>
 				<td>Rp. <?php echo number_format($p->total_pembelian) ?></td>
+				<td><?php echo $p->resi ?></td>
 				<td>
 					<?php if (in_array($p->status_pembelian, ['Belum Bayar'])) : ?>
 						<a href="<?= base_url('riwayat/pembayaran/') . $p->id_pembelian ?>" class="btn btn-success">Pembayaran</a>

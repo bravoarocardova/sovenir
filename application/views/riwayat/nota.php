@@ -10,7 +10,8 @@
 			</span> <br>
 			Tanggal : <?= $pembelian->tanggal_pembelian ?> <br>
 			Ekspedisi : <?= $pembelian->ekspedisi ?> <br>
-			Tujuan : <?= $pembelian->tujuan ?>
+			Tujuan : <?= $pembelian->tujuan ?> <br>
+			Resi : <?= $pembelian->resi ?>
 		</p>
 
 		<!-- cetak pembelian -->

@@ -13,3 +13,10 @@
 <!--script for this page-->
 <script src="<?= base_url('assets/admin/') ?>lib/sparkline-chart.js"></script>
 <script src="<?= base_url('assets/admin/') ?>lib/zabuto_calendar.js"></script>
+
+<script src="<?= base_url('assets/admin/') ?>lib/DataTables/datatables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable();
+  });
+</script>
